@@ -44,7 +44,7 @@
 				
 			}
 
-			$.ajax({type:"POST", url: "https://thejob.center/search.php", data: 'f='+ sf, 
+			$.ajax({type:"POST", url: "https://thejob.center/search.php", dataType: 'json', data: 'f='+ sf, 
 				success: function(thisText){
 					var hints = JSON.parse(thisText);
 					var showResults="";

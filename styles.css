@@ -1,26 +1,32 @@
 html {
-	background-color: Ivory;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
 	
 }
-
+body { 
+	min-height: 100%; 
+	overflow: hidden;
+	font-family: Tahoma, sans-serif; 
+	font-size: 16px;
+}
 form {
-    width: 600px;
+    width: 100%;
 	height: 60px;
-    margin: 100px auto;
-	background-color: #e5e4e2	;
-	padding: 20px 20px 20px 20px;
+	padding: 20px 0 20px 0;
 }
 
 input[type=search] {
-    width: 600px;
+    width: 90%;
     height: 40px;
     font-size: 16px;
-    padding: 0px 5px 0px 15px;
+	margin-left: 20px;
+	margin-right:20px;
+    padding: 0px 15px 0px 15px;
     border-radius: 6px;
     outline: none;
-    border: solid gray 2px;
     background: url('Search.png') right 5px center no-repeat;
-	background-color: Ivory;
 	font-family:  monospace;
 	
 }
@@ -31,7 +37,59 @@ input[type=search]::-webkit-search-cancel-button,
 input[type=search]::-webkit-search-results-button,
 input[type=search]::-webkit-search-results-decoration {display:none;}
 
-.hintResults { font-size: 16px; outline: none; border: none; background-color: #add8e6; margin-top: 10px; margin-right: 10px; cursor: pointer; visibility:none;}
-.hintResultsFirst { background-color: #9fe2bf; }
-.hintHelp { font-family: Tahoma, sans-serif; font-size: 12px; padding-top: 10px; padding-left: 5px; }
+.hintResults { font-size: 16px; outline: none; border: none; margin-top: 10px; margin-right: 10px; margin-left: 20px; cursor: pointer; visibility:none;}
+.hintHelp { font-family: Tahoma, sans-serif; font-size: 12px; padding-top: 10px; padding-left: 5px; margin-left: 20px; }
 
+.container {
+	display: grid;
+	grid-template-columns:  1fr ; 
+	grid-template-rows: 100px 1fr;
+	gap: 0px 0px;
+	grid-template-areas:
+		"headerGrid"
+		"mainGrid";
+	height: 100vh;
+	position: fixed;
+	top:  0;
+	left: 0;
+	right:0;
+	bottom:0;
+}
+
+.headerGrid {
+	display: grid;
+	grid-template-columns: 200px 1fr 100px;
+	grid-template-rows: 80px 20px;
+	gap: 0px 0px;
+	grid-template-areas:
+		"logoGrid searchGrid signinGrid"
+		"dateGrid searchGrid policyGrid";
+
+}
+.logoGrid { grid-area: logoGrid; margin-top: 15px; background: url('jc-header-black.png')  no-repeat;}
+.dateGrid { grid-area: dateGrid; padding-left: 10px; padding-bottom: 5px;}
+.searchGrid { grid-area: searchGrid;}
+.signinGrid { grid-area: signinGrid;}
+.policyGrid { grid-area: policyGrid; cursor:pointer; text-align: center; font-size: 12px;}
+.leftGrid { grid-area: leftGrid;}
+.mainGrid { grid-area: mainGrid; min-height:100%; overflow-y: auto;	overflow-x: hidden;}
+
+@media (prefers-color-scheme: light) {
+
+html { background-color: #fffff0; color: #36454f;}
+.headerGrid {background-color: #e5e4e2	;}
+input[type=search] { background-color: #fffff0; color: #36454f; border: solid #808080 2px;}
+.hintResults { background-color: #add8e6; }
+.hintResultsFirst { background-color: #9fe2bf; }
+.dateColor {color: #0000ff; }
+}
+
+@media (prefers-color-scheme: dark) {
+
+html { background-color: #71797e; color: #fffff0; }
+.headerGrid {background-color: #818589; }
+input[type=search] { background-color: #71797e; color: #7df9ff; border: solid #c0c0c0 2px;}
+.hintResults { background-color: #36454f; color: #ff7f50; }
+.hintResultsFirst { background-color: #36454f; color: #7df9ff;}
+.dateColor {color: #00ffff; }
+}

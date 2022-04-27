@@ -4,11 +4,11 @@
 	<link rel="preconnect" href="https://ajax.googleapis.com">
 	<link rel="preconnect" href="https://TheJobCenter.github.io">
 	<noscript><style>html{display:none;}</style></noscript>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="color-scheme" content="light dark" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="color-scheme" content="light dark" >
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://TheJobCenter.github.io/EmploymentAgency/styles.css">
-	<link rel="shortcut icon" href="https://TheJobCenter.github.io/EmploymentAgency/favicon.ico" />
+	<link rel="shortcut icon" href="https://TheJobCenter.github.io/EmploymentAgency/favicon.ico" >
 	<link rel="apple-touch-icon" href="https://TheJobCenter.github.io/EmploymentAgency/apple-touch-icon.png">
 	<title>The Job Center - employment personified</title>
 	<meta name="description" content="The employment center designed to help you achieve career greatness and happiness">
@@ -23,123 +23,25 @@
 				<form id="searchform" action="#">
 					<input id="searchFor" type="search" placeholder="Search ... [enter Job ID or keywords]" autofocus autocomplete="off"><br>
 					<div id="coding" class="hintHelp"></div>
-					<button type="button" id="hintFirst" class="hintResults hintResultsFirst" value="first"></button><button type="button" id="hintSecond" class="hintResults"></button><button type="button" id="hintThird" class="hintResults"></button>
+					<button type="button" id="hintFirst" class="hintResults hintResultsFirst" >Placeholder</button><button type="button" id="hintSecond" class="hintResults">Placeholder</button><button type="button" id="hintThird" class="hintResults">Placeholder</button>
 				</form>
 			</div>
 			<div class="signinGrid">signin</div>
-			<div class="policyGrid">Policies</div>
+			<div class="policyGrid">
+				<button type="button" class="policyButton">Policies</button>
+				<div class="policyDropdownList">
+					<button type="button" id="policyAUP" class="policyDropButton">Acceptable Use</button>
+					<button type="button" id="policyTOS" class="policyDropButton">Terms of Service</button>
+					<button type="button" id="policyCookies" class="policyDropButton">Cookies</button>
+					<button type="button" id="policyPrivacy" class="policyDropButton">Privacy</button>
+					<button type="button" id="policyGreen" class="policyDropButton">Green</button>
+					<button type="button" id="policyAbout" class="policyDropButton">About Us</button>
+				</div>
+			</div>
 		</div>
 		<div class="mainGrid">main</div>
 	</div>
-	
-	<script>
-		$(document).ready(function() {
+	<script src="https://TheJobCenter.github.io/EmploymentAgency/worker.js"></script>
 		
-			$('#hintFirst').click(function() {selectHint(this.id);})
-			$('#hintSecond').click(function() {selectHint(this.id);})
-			$('#hintThird').click(function() {selectHint(this.id);})
-			var todaysDate = new Date().toISOString().slice(0,10);
-			$('#dateGrid').html('Last updated: <span class="dateColor">' + todaysDate + '</span>');
-			hideHints();
-			
-		});
-
-
-		$('#searchform').submit(function(e) { // this does the Submit search
-			e.preventDefault();
-			var sf = $('#searchFor').val().trim();
-			if(sf.indexOf(' ') != -1) sf=sf.split(' ').toString(); // convert from space seperated list to comma seperated list
-
-			$.ajax({type:"POST", url: "search.php", data: 'f='+ sf, 
-				success: function(thisText){
-					var hints = JSON.parse(thisText);
-					var showResults="";
-					for(i=0;i<hints.length;i++){
-						showResults = showResults + ' ' + hints[i].name;
-					}
-					hideHints();
-					document.title = "The Job Center - " + showResults;
-//					$('#coding').html(showResults); 
-				},
-				error: function(thisText) {
-					searchError();
-				}
-			});
-
-		});
-	
-		$('#searchFor').keyup( function(e) { // this does the auto-complete search
-		
-			if(e.key === ' ') {
-				if($('#hintFirst').html() != '') selectHint('hintFirst');
-			} 
-			var typed = $(this).val();
-
-			if(typed != '') {
-				hideHints();
-				var getLastWord = typed.split(' ');
-				if(getLastWord[getLastWord.length-1].trim() != '') {
-					$.ajax({type:"POST", url: "search.php", data: 's='+ getLastWord[getLastWord.length-1], 
-						success: function(thisText){
-							var hints = JSON.parse(thisText);
-							if(hints.length) {
-								if(hints.length>0) showHints('hintFirst',hints[0].name);
-								if(hints.length>1) showHints('hintSecond',hints[1].name);
-								if(hints.length>2) showHints('hintThird',hints[2].name);
-							} else {
-								searchError();
-							}
-						},
-						error: function(thisText){
-							searchError();
-						}
-					});
-				}
-				
-			} else {
-			
-				hideHints();
-				
-			}
-
-		});
-		
-		function selectHint(btnName) {
-		
-			
-			var hint = $('#'+btnName).html();
-			var searchForText = $('#searchFor').val();
-			var searchFor = searchForText.split(' ');
-			if(searchForText.slice(searchForText.length-1) === ' ') searchFor.pop();
-			searchFor[searchFor.length-1]=hint;
-			$('#searchFor').val(searchFor.join(' ')+' ').focus();
-		
-		}
-		
-	
-		function searchError() {
-		
-			$('#coding').html('Nothing found for those search terms.');
-			
-		}
-	
-		function showHints(where,what) {
-		
-			$('#'+where).show().html(what);
-			$('#coding').hide().html("");
-
-		}
-		
-		function hideHints() {
-		
-			$('#hintFirst').hide().html();
-			$('#hintSecond').hide().html();
-			$('#hintThird').hide().html();
-			$('#coding').show().html("Start typing, press 'Space' to auto-complete, 'Enter' to select.");
-
-		}
-		
-	</script>
-	
 </body>
 </html>

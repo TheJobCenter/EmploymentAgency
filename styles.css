@@ -69,7 +69,7 @@ input[type=search]::-webkit-search-results-decoration {display:none;}
 .logoGrid { grid-area: logoGrid; margin-top: 15px; background: url('jc-header-black.png')  no-repeat;}
 .dateGrid { grid-area: dateGrid; padding-left: 10px; padding-bottom: 5px;}
 .searchGrid { grid-area: searchGrid;}
-.signinGrid { grid-area: signinGrid;}
+.signinGrid { grid-area: signinGrid; padding-left:15px; padding-top: 3px; cursor:pointer;}
 .policyGrid { grid-area: policyGrid; text-align: center; font-size: 12px; position: relative;}
 .leftGrid { grid-area: leftGrid;}
 .mainGrid { grid-area: mainGrid; min-height:100%; overflow-y: auto;	overflow-x: hidden;}
@@ -120,6 +120,7 @@ input[type=search] { background-color: #fffff0; color: #36454f; border: solid #8
 .policyDropdownList button:hover { background-color: #ddd; color: #0000ff;}
 .policyGrid:hover { background-color: #f1f1f1;}
 .policyDropButton {color: #36454f;}
+.signinSVG {fill: #36454f}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -135,4 +136,6 @@ input[type=search] { background-color: #71797e; color: #7df9ff; border: solid #c
 .policyGrid:hover { background-color: #f1f1f1;}
 .policyButton:hover {color: #0000ff;}
 .policyDropButton {color: #0000ff;}
+.signinSVG {fill: #fffff0;}
+
 }

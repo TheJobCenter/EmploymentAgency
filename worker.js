@@ -12,7 +12,8 @@
 			$('#policyPrivacy').click(function() {showPolicy('privacy');})
 			$('#policyGreen').click(function() {showPolicy('green');})
 			$('#policyAbout').click(function() {showPolicy('about');})
-			
+			$('#searchFor').attr('placeholder','Search ... [enter Job ID or keywords]');
+			$('#policyTopButton').html('Policies');
 			var todaysDate = new Date().toISOString().slice(0,10);
 			$('#dateGrid').html('Last updated: <span class="dateColor">' + todaysDate + '</span>');
 			hideHints();

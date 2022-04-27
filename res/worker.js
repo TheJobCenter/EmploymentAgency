@@ -1,4 +1,4 @@
-	var workerURL = "worker.php";
+	var workerURL = "https://thejob.center/worker.php";
 	var st = [];
 	var userLanguage = window.navigator.language.substring(0,2);
 	var systemLang = document.documentElement.lang.substring(0,2);

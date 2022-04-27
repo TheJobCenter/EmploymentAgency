@@ -1,25 +1,50 @@
 	var workerURL = "worker.php";
-	var defaultTitle = "The Job Center - employment personified";
-		
+	var st = [];
+	var userLanguage = window.navigator.language.substring(0,2);
+	var systemLang = document.documentElement.lang.substring(0,2);
+	var postData = 'xfrom='+ systemLang + '&xto=' + userLanguage;
+
+	$.ajax({type:"POST", url: workerURL, data: postData , 
+		success: function(thisText){
+			st = JSON.parse(thisText);
+		},
+		error: function(someotherText) {
+			alert('Translation error');
+		}
+	});
+
+	var qwerty = st.length;
+	//alert(qwerty);
 	$(document).ready(function() {
 		
 			$('#hintFirst').click(function() {selectHint(this.id);})
 			$('#hintSecond').click(function() {selectHint(this.id);})
 			$('#hintThird').click(function() {selectHint(this.id);})
-			$('#policyAUP').click(function() {showPolicy('aup');})
-			$('#policyTOS').click(function() {showPolicy('tos');})
-			$('#policyCookies').click(function() {showPolicy('cookies');})
-			$('#policyPrivacy').click(function() {showPolicy('privacy');})
-			$('#policyGreen').click(function() {showPolicy('green');})
-			$('#policyAbout').click(function() {showPolicy('about');})
-			$('#searchFor').attr('placeholder','Search ... [enter Job ID or keywords]');
-			$('#policyTopButton').html('Policies');
-			var todaysDate = new Date().toISOString().slice(0,10);
-			$('#dateGrid').html('Last updated: <span class="dateColor">' + todaysDate + '</span>');
-			hideHints();
-			
-	
 
+			$('#policyAUP').html(st[0].auptitle);
+			$('#policyAUP').click(function() {showPolicy(st[0].aupcode);})
+			$('#policyTOS').html(st[0].tostitle);
+			$('#policyTOS').click(function() {showPolicy(st[0].toscode);})
+			$('#policyCookies').html(st[0].cookiestitle);
+			$('#policyCookies').click(function() {showPolicy(st[0].cookiescode);})
+			$('#policyPrivacy').html(st[0].privacytitle);
+			$('#policyPrivacy').click(function() {showPolicy(st[0].privacycode);})
+			$('#policyGreen').html(st[0].greentitle);
+			$('#policyGreen').click(function() {showPolicy(st[0].greencode);})
+			$('#policyAbout').html(st[0].abouttitle);
+			$('#policyAbout').click(function() {showPolicy(st[0].aboutcode);})
+
+			$('#signinSVG').click(function() {showLogin(); })
+			$('#signoutSVG').click(function() {hideLogin(); })
+			$('#searchFor').attr('placeholder',st[0].searchfor);
+			$('#policyTopButton').html(st[0].policies);
+			var todaysDate = new Date().toISOString().slice(0,10);
+			$('#dateGrid').html(st[0].lastupdated + ': <span class="dateColor">' + todaysDate + '</span>');
+			hideHints();
+			hideLogin();
+			
+	});
+	
 		$('#searchform').submit(function(e) { // this does the Submit search
 			e.preventDefault();
 			var sf = $('#searchFor').val().trim();
@@ -33,8 +58,7 @@
 						showResults = showResults + ' ' + hints[i].name;
 					}
 					hideHints();
-					document.title = "The Job Center - " + showResults;
-//					$('#coding').html(showResults); 
+					document.title = "The Job Center - " + showResults; 
 				},
 				error: function(thisText) {
 					searchError();
@@ -94,7 +118,7 @@
 	
 		function searchError() {
 		
-			$('#coding').html('Nothing found for those search terms.');
+			$('#coding').html(st[0].nothingfound);
 			
 		}
 	
@@ -110,17 +134,48 @@
 			$('#hintFirst').hide().html();
 			$('#hintSecond').hide().html();
 			$('#hintThird').hide().html();
-			$('#coding').show().html("Start typing, press 'Space' to auto-complete, 'Enter' to select.");
+			$('#coding').show().html(st[0].searchhint);
 
 		}
 		
 		function showPolicy(showWhat) {
 		
 			$('.policyDropdownList').hide();
-			document.title = "The Job Center - " + showWhat + " policy";
-			alert('policy');			
+			var pol = new Array(), postData = "policy=" + showWhat + "&lang=" + userLanguage;
+
+			$.ajax({type:"POST", url: workerURL, data: postData , 
+				success: function(thisText){
+					pol = JSON.parse(thisText);
+					document.title = st[0].titlepolicypre + ' : ' + pol[0].displayname + ' ' + st[0].titlepolicypost;
+					alert(pol[0].content);
+					pol = Array(); // clear data
+				},
+				error: function(someotherText) {
+					alert('Could not find a policy named "' + showWhat + '" in language "' + userLanguage + '"');
+				}
+			});
 			$('.policyDropdownList').show();
-			document.title = defaultTitle;
+
+		}
+		
+		function showLogin() {
+			
+			$('#signinGrid').prop('title',st[0].signout);
+			$('#signinSVG').hide();
+			$('#signoutSVG').show();
+			$('#loginForm').show();
+			
 		}
 
-	});
+		function hideLogin() {
+			
+			$('#signinGrid').prop('title',st[0].signin);	
+			$('#loginForm').hide();
+			$('#signoutSVG').hide();
+			$('#signinSVG').show();
+		}
+
+	
+//	$(document).ready(function() {
+
+//	});

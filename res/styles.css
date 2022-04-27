@@ -18,7 +18,7 @@ form {
 }
 
 input[type=search] {
-    width: 90%;
+    width: 97%;
     height: 40px;
     font-size: 16px;
 	margin-left: 20px;
@@ -104,13 +104,19 @@ input[type=search]::-webkit-search-results-decoration {display:none;}
 	display: block;
 }
 
-
+.loginModal {
+	width:300px;
+	height:200px;
+	border: 1px solid gray;
+	box-sizing: border-box;
+	margin:10px;
+}
 
 
 
 @media (prefers-color-scheme: light) {
 
-html { background-color: #fffff0; color: #36454f;}
+html { background-color: #f9f6ee; color: #36454f;}
 .headerGrid {background-color: #e5e4e2	;}
 input[type=search] { background-color: #fffff0; color: #36454f; border: solid #808080 2px;}
 .hintResults { background-color: #add8e6; }

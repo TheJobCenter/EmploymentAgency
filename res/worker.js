@@ -5,9 +5,6 @@
 	var postData = 'xfrom='+ systemLang + '&xto=' + userLanguage;
 
 	$.ajax({type:"POST", url: workerURL, data: postData , 
-		beforeSend(xhr) {
-			xhr.setRequestHeader('Authorization','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');
-		},
 		success: function(thisText){
 			st = JSON.parse(thisText);
 		},

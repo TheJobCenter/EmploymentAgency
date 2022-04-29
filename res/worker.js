@@ -2,8 +2,7 @@
 		t = [], sp = []; 
 		translate = false;
 		websiteAddress = window.location.protocol + '//' + window.location.host;
-//		websiteAddress = 'https://thejob.page/backoffice.php'; // + window.location.host;
-		
+		websiteTitle = document.title.substring(0, document.title.indexOf('-')).trim();
 		var userLanguage = window.navigator.language.substring(0,2);
 		var systemLang = document.documentElement.lang.substring(0,2);
 		var postData = 'xfrom='+ systemLang + '&xto=' + userLanguage;
@@ -47,7 +46,6 @@
 			$('#policyTopButton').html(t[0].policies);
 			$('#signinTitle').html(t[0].signin);
 			$('#signoutTitle').html(t[0].signout);
-
 			$('#dateGrid').html(t[0].lastupdated + ': <span class="dateColor">' + todaysDate + '</span>');
 		} else {
 			$('#dateGrid').html(lastUpdated + ': <span class="dateColor">' + todaysDate + '</span>');
@@ -55,19 +53,20 @@
 		hideHints();
 		hideLogin();
 
-		
-		getSearchParameters = window.location.search.trim().substring(1); // if there remove 1st ?
+		getSearchParameters = window.location.search.trim().replace(/^.*\?/, '').toLowerCase(); // delete upto and including the '?'
 		if (getSearchParameters != "") {
-			//pass it on and let the PHP script check for legitimate queries
-			$.ajax({type:'POST', url: workerURL, data: getSearchParameters ,  async: false, 
-				success: function(thisText){
-					sp = Object.values(JSON.parse(thisText));
-				},
-				error: function(someotherText) {
-					// do nothing, don't care !!
-				}
-			});
-
+			if (getSearchParameters.match(';') != ';') { // make sure no lazy script kiddies waste processor time
+				//if no language specified, pass on previously worked out browser language
+				if (getSearchParameters.match('lang=') != 'lang=') getSearchParameters += '&lang=' + userLanguage;
+				$.ajax({type:'POST', url: workerURL, data: getSearchParameters ,  async: false, 
+					success: function(thisText){
+						sp = Object.values(JSON.parse(thisText));
+					},
+					error: function(someotherText) {
+						// do nothing, don't care !!
+					}
+				});
+			}
 			if(window.history.replaceState) {
 				window.history.replaceState({}, null , websiteAddress);	// get rid of trailing search parameters to make it tidy !!
 			}
@@ -75,6 +74,8 @@
 			
 		$('#searchform').submit(function(e) { // this does the Submit search
 			e.preventDefault();
+			if($('#hintFirst').html() != '') selectHint('hintFirst');
+
 			var sf = $('#searchFor').val().trim();
 			if(sf.indexOf(' ') != -1) sf=sf.split(' ').toString(); // convert from space seperated list to comma seperated list
 
@@ -86,10 +87,15 @@
 						showResults = showResults + ' ' + hints[i].name;
 					}
 					hideHints();
-					document.title = 'The Job Center - ' + showResults; 
+					if(showResults != '') {
+						document.title = websiteTitle + ' - ' + showResults; 
+					} else {
+						document.title = websiteTitle;
+					}
 				},
 				error: function(thisText) {
 					searchError();
+					document.title = websiteTitle;
 				}
 			});
 
@@ -154,15 +160,15 @@
 		
 			$('#searchHint').hide();
 			$('#searchNothing').hide();
-			$('#'+where).show().html(what);
+			$('#'+where).show().html(what).prop('title',what);
 
 		}
 		
 		function hideHints() {
 		
-			$('#hintFirst').hide().html('');
-			$('#hintSecond').hide().html('');
-			$('#hintThird').hide().html('');
+			$('#hintFirst').hide().html('').prop('title','');
+			$('#hintSecond').hide().html('').prop('title','');
+			$('#hintThird').hide().html('').prop('title','');
 			$('#searchNothing').hide();
 			$('#searchHint').show();
 
@@ -190,7 +196,6 @@
 		
 		function showLogin() {
 			
-		//	$('#signinGrid').prop('title',t[0].signout);
 			$('#signinSVG').hide();
 			$('#signoutSVG').show();
 			$('#loginForm').show();
@@ -199,7 +204,6 @@
 
 		function hideLogin() {
 			
-		//	$('#signinGrid').prop('title',t[0].signin);	
 			$('#loginForm').hide();
 			$('#signoutSVG').hide();
 			$('#signinSVG').show();

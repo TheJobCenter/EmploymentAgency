@@ -6,7 +6,7 @@
 	<noscript><style>html{display:none;}</style></noscript>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="color-scheme" content="light dark" >
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="res/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="res/styles.css">
 	<link rel="shortcut icon" href="res/favicon.ico" >
 	<link rel="apple-touch-icon" href="res/apple-touch-icon.png">
@@ -34,12 +34,12 @@
 			<div class="policyGrid">
 				<button type="button" id="policyTopButton" class="policyButton">Policies</button>
 				<div class="policyDropdownList">
-					<button type="button" id="policyTOS" class="policyDropButton">Terms of Service</button>
-					<button type="button" id="policyAUP" class="policyDropButton">Acceptable use</button>
-					<button type="button" id="policyCookies" class="policyDropButton">Cookies</button>
-					<button type="button" id="policyPrivacy" class="policyDropButton">Privacy</button>
-					<button type="button" id="policyGreen" class="policyDropButton">Enviromental</button>
-					<button type="button" id="policyAbout" class="policyDropButton">About us</button>
+					<button type="button" id="policyTOS" class="policyDropButton" onclick="showPolicy('tos');">Terms of Service</button>
+					<button type="button" id="policyAUP" class="policyDropButton" onclick="showPolicy('aup');">Acceptable use</button>
+					<button type="button" id="policyCookies" class="policyDropButton" onclick="showPolicy('cookies');">Cookies</button>
+					<button type="button" id="policyPrivacy" class="policyDropButton" onclick="showPolicy('privacy');">Privacy</button>
+					<button type="button" id="policyGreen" class="policyDropButton" onclick="showPolicy('green');">Enviromental</button>
+					<button type="button" id="policyAbout" class="policyDropButton" onclick="showPolicy('about');">About us</button>
 				</div>
 			</div>
 		</div>

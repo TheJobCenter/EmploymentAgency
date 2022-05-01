@@ -1,0 +1,265 @@
+html {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	
+}
+body { 
+	min-height: 100%; 
+	overflow: hidden;
+	font-family: Tahoma, sans-serif; 
+	font-size: 16px;
+}
+
+.searchForm {
+    width: 100%;
+	height: 60px;
+	padding: 20px 0 20px 0;
+}
+
+@media only screen and (orientation: landscape) {
+
+input[type=search] {
+    width: 97%;
+    height: 40px;
+    font-size: 16px;
+	margin-left: 20px;
+	margin-right:20px;
+    padding: 0px 15px 0px 15px;
+    border-radius: 6px;
+    outline: none;
+	font-family:  monospace;
+	
+}
+input[type=search]::-ms-clear {display:none; width:0; height:0}
+input[type=search]::-ms-reveal {display:none; width:0; height:0}
+input[type=search]::-webkit-search-decoration,
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-results-button,
+input[type=search]::-webkit-search-results-decoration {display:none;}
+
+.hintResults { font-size: 16px; outline: none; border: none; margin-top: 10px; margin-right: 10px; margin-left: 20px; cursor: pointer; visibility:none;}
+.hintHelp { font-family: Tahoma, sans-serif; font-size: 12px; padding-top: 10px; padding-left: 5px; margin-left: 20px; }
+
+.container {
+	display: grid;
+	grid-template-columns:  1fr ; 
+	grid-template-rows: 100px 1fr;
+	gap: 0px 0px;
+	grid-template-areas:
+		"headerGrid"
+		"mainGrid";
+	height: 100vh;
+	position: fixed;
+	top:  0;
+	left: 0;
+	right:0;
+	bottom:0;
+}
+
+.headerGrid {
+	display: grid;
+	grid-template-columns: 200px 1fr 100px;
+	grid-template-rows: 80px 20px;
+	gap: 0px 0px;
+	grid-template-areas:
+		"logoGrid searchGrid signinGrid"
+		"dateGrid searchGrid policyGrid";
+
+}
+.logoGrid { grid-area: logoGrid; margin-top: 15px; }
+.dateGrid { grid-area: dateGrid; padding-left: 10px; padding-bottom: 5px;}
+.searchGrid { grid-area: searchGrid;}
+.signinGrid { grid-area: signinGrid; padding-left:18px; padding-top: 3px; cursor:pointer;}
+.policyGrid { grid-area: policyGrid; text-align: center; font-size: 12px; position: relative;}
+.leftGrid { grid-area: leftGrid;}
+.mainGrid { grid-area: mainGrid; min-height:100%; overflow-y: auto;	overflow-x: hidden;}
+
+.policyButton {
+	text-decoration: none;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.policyDropdownList {
+	display: none;
+	position: absolute;
+	right: 0;
+	min-width: 160px;
+	box-shadow: 0 8px 16px 8px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+
+.policyDropdownList button {
+	min-width: 160px;
+	padding: 12px 12px;
+	text-decoration: none;
+	border: none;
+	display: block;
+	cursor: pointer;
+}
+
+.policyGrid:hover .policyDropdownList {
+	display: block;
+}
+
+.loginModal {
+	width:300px;
+	height:200px;
+	border: 1px solid gray;
+	box-sizing: border-box;
+	margin:10px;
+	display: hidden;
+}
+
+}
+@media only screen and (orientation: portrait) {
+
+input[type=search] {
+    width: 97%;
+    height: 40px;
+    font-size: 16px;
+	margin-left: 20px;
+	margin-right:20px;
+    padding: 0px 15px 0px 15px;
+    border-radius: 6px;
+    outline: none;
+	font-family:  monospace;
+	
+}
+input[type=search]::-ms-clear {display:none; width:0; height:0}
+input[type=search]::-ms-reveal {display:none; width:0; height:0}
+input[type=search]::-webkit-search-decoration,
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-results-button,
+input[type=search]::-webkit-search-results-decoration {display:none;}
+
+.hintResults { font-size: 16px; outline: none; border: none; margin-top: 10px; margin-right: 10px; margin-left: 20px; cursor: pointer; visibility:none;}
+.hintHelp { font-family: Tahoma, sans-serif; font-size: 12px; padding-top: 10px; padding-left: 5px; margin-left: 20px; }
+
+.container {
+	display: grid;
+	grid-template-columns:  1fr ; 
+	grid-template-rows: 100px 1fr;
+	gap: 0px 0px;
+	grid-template-areas:
+		"headerGrid"
+		"mainGrid";
+	height: 100vh;
+	position: fixed;
+	top:  0;
+	left: 0;
+	right:0;
+	bottom:0;
+}
+
+.headerGrid {
+	display: grid;
+	grid-template-columns: 200px 1fr 100px;
+	grid-template-rows: 80px 20px;
+	gap: 0px 0px;
+	grid-template-areas:
+		"logoGrid searchGrid signinGrid"
+		"dateGrid searchGrid policyGrid";
+
+}
+.logoGrid { grid-area: logoGrid; margin-top: 15px; }
+.dateGrid { grid-area: dateGrid; padding-left: 10px; padding-bottom: 5px;}
+.searchGrid { grid-area: searchGrid;}
+.signinGrid { grid-area: signinGrid; padding-left:18px; padding-top: 3px; cursor:pointer;}
+.policyGrid { grid-area: policyGrid; text-align: center; font-size: 12px; position: relative;}
+.leftGrid { grid-area: leftGrid;}
+.mainGrid { grid-area: mainGrid; min-height:100%; overflow-y: auto;	overflow-x: hidden;}
+
+.policyButton {
+	text-decoration: none;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.policyDropdownList {
+	display: none;
+	position: absolute;
+	right: 0;
+	min-width: 160px;
+	box-shadow: 0 8px 16px 8px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+
+.policyDropdownList button {
+	min-width: 160px;
+	padding: 12px 12px;
+	text-decoration: none;
+	border: none;
+	display: block;
+	cursor: pointer;
+}
+
+.policyGrid:hover .policyDropdownList {
+	display: block;
+}
+
+.loginModal {
+	width:300px;
+	height:200px;
+	border: 1px solid gray;
+	box-sizing: border-box;
+	margin:10px;
+	display: hidden;
+}
+
+
+
+}
+
+@media (prefers-color-scheme: light) {
+
+html { background-color: #f9f6ee; color: #36454f;}
+.headerGrid {background-color: #e5e4e2	;}
+input[type=search] { background-color: #fffff0; color: #36454f; border: solid #808080 2px;}
+.hintResults { background-color: #add8e6; }
+.hintResultsFirst { background-color: #9fe2bf; }
+.dateColor {color: #0000ff; }
+.policyDropdownList {background-color: #f1f1f1; }
+.policyDropdownList button:hover { background-color: #ddd; color: #0000ff;}
+.policyGrid:hover { background-color: #f1f1f1;}
+.policyDropButton {color: #36454f;}
+.signinSVG {fill: #36454f}
+.logoGrid { background: url('/res/images/header-light.png')  no-repeat;}
+input[type=search] { background: url('/res/images/search-light.png') right 5px center no-repeat;}
+input[type=search]::placeholder {color: #36454f; opacity: 1;}
+input[type=search]:-ms-input-placeholder {color: #36454f; opacity: 1;}
+input[type=search]::-ms-input-placeholder {color: #36454f; opacity: 1;}
+.policyDropdownList button { color: #36454f; }
+
+}
+
+@media (prefers-color-scheme: dark) {
+
+html { background-color: #71797e; color: #fffff0; }
+.headerGrid {background-color: #818589; }
+input[type=search] { background-color: #71797e; color: #7df9ff; border: solid #c0c0c0 2px;}
+.hintResults { background-color: #36454f; color: #ff7f50; }
+.hintResultsFirst { background-color: #36454f; color: #7df9ff;}
+.dateColor {color: #00ffff; }
+.policyDropdownList {background-color: #f1f1f1; color: #0000ff;}
+.policyDropdownList button:hover { background-color: #ddd; color: #0000ff;}
+.policyGrid:hover { background-color: #f1f1f1;}
+.policyButton:hover {color: #0000ff;}
+.policyDropButton {color: #0000ff;}
+.signinSVG {fill: #fffff0;}
+.logoGrid { background: url('/res/images/header-dark.png')  no-repeat;}
+input[type=search] { background: url('/res/images/search-dark.png') right 5px center no-repeat; }
+input[type=search]::placeholder {color: #fffff0; opacity: 1;}
+input[type=search]:-ms-input-placeholder {color: #fffff0; opacity: 1;}
+input[type=search]::-ms-input-placeholder {color: #fffff0; opacity: 1;}
+.policyDropdownList button { color: #fffff0; }
+
+
+
+}
+
+

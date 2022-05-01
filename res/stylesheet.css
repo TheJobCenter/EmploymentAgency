@@ -273,8 +273,8 @@ input[type=search] { background-color: #fffff0; color: #36454f; border: solid #8
 .policyDropButton {color: #36454f;}
 .signinSVG {fill: #36454f}
 .signOutSVG {fill: #36454f; display: none;}
-.logoGrid { background: url('/res/header-light.png')  no-repeat;}
-input[type=search] { background: url('/res/search-light.png') left 5px center no-repeat;}
+.logoGrid { background: url('https://thejobcenter.github.io/EmploymentAgency//res/header-light.png')  no-repeat;}
+input[type=search] { background: url('https://thejobcenter.github.io/EmploymentAgency//res/search-light.png') left 5px center no-repeat;}
 input[type=search]::placeholder {color: #36454f; opacity: 1;}
 input[type=search]:-ms-input-placeholder {color: #36454f; opacity: 1;}
 input[type=search]::-ms-input-placeholder {color: #36454f; opacity: 1;}
@@ -298,8 +298,8 @@ input[type=search] { background-color: #71797e; color: #7df9ff; border: solid #c
 .policyDropButton {color: #0000ff;}
 .signinSVG {fill: #fffff0;}
 .signOutSVG {fill: #fffff0; display:none;}
-.logoGrid { background: url('/res/header-dark.png')  no-repeat;}
-input[type=search] { background: url('/res/search-dark.png') left 5px center no-repeat; }
+.logoGrid { background: url('https://thejobcenter.github.io/EmploymentAgency//res/header-dark.png')  no-repeat;}
+input[type=search] { background: url('https://thejobcenter.github.io/EmploymentAgency//res/search-dark.png') left 5px center no-repeat; }
 input[type=search]::placeholder {color: #fffff0; opacity: 1;}
 input[type=search]:-ms-input-placeholder {color: #fffff0; opacity: 1;}
 input[type=search]::-ms-input-placeholder {color: #fffff0; opacity: 1;}

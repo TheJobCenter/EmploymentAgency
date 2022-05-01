@@ -45,7 +45,10 @@
 			$('#searchHint').html(t.searchhint);
 			$('#searchNothing').html(t.nothingfound);
 			$('#searchFor').prop('placeholder',t.searchfor);
-	//		$('#policyTopButton').html(t.policies);
+			$('#labelJobs').html(t.labeljobs);
+			$('#labelNews').html(t.labelnews);
+			$('#labelContact').html(t.labelcontact);
+			$('#labelPolicies').html(t.labelpolicies);
 			$('#signinTitle').html(t.signin);
 			$('#signoutTitle').html(t.signout);
 //			$('#dateGrid').html(t.lastupdated + ': <span class="dateColor">' + todaysDate + '</span>');

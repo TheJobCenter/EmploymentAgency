@@ -32,7 +32,9 @@
 		var todaysDate = new Date().toISOString().slice(0,10);
 		lastUpdated = $('#dateGrid').html();
 		searchHint = $('#searchHint').html();
+		
 		if (translate) {
+/*
 			$('#policyAUP').html(t.auptitle);
 			$('#policyTOS').html(t.tostitle);
 			$('#policyCookies').html(t.cookiestitle);
@@ -44,11 +46,12 @@
 			$('#searchNothing').html(t.nothingfound);
 			$('#searchFor').prop('placeholder',t.searchfor);
 			$('#policyTopButton').html(t.policies);
+*/
 			$('#signinTitle').html(t.signin);
 			$('#signoutTitle').html(t.signout);
-			$('#dateGrid').html(t.lastupdated + ': <span class="dateColor">' + todaysDate + '</span>');
+//			$('#dateGrid').html(t.lastupdated + ': <span class="dateColor">' + todaysDate + '</span>');
 		} else {
-			$('#dateGrid').html(lastUpdated + ': <span class="dateColor">' + todaysDate + '</span>');
+//			$('#dateGrid').html(lastUpdated + ': <span class="dateColor">' + todaysDate + '</span>');
 		}
 	}
 		hideHints();
@@ -77,6 +80,8 @@
 		if(window.history.replaceState) {
 			window.history.replaceState({}, null , websiteAddress);	// get rid of trailing search parameters to make it tidy !!
 		}
+
+	//	$('#radioNews').prop('checked', true);
 			
 		$('#searchform').submit(function(e) { // this does the Submit search
 			e.preventDefault();
@@ -203,13 +208,13 @@
 			
 			$('#signinSVG').hide();
 			$('#signoutSVG').show();
-			$('#loginForm').show();
+	//		$('#loginForm').show();
 			
 		}
 
 		function hideLogin() {
 			
-			$('#loginForm').hide();
+	//		$('#loginForm').hide();
 			$('#signoutSVG').hide();
 			$('#signinSVG').show();
 		}

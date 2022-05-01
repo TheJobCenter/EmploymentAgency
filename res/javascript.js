@@ -41,12 +41,11 @@
 			$('#policyPrivacy').html(t.privacytitle);
 			$('#policyGreen').html(t.greentitle);
 			$('#policyDisclaim').html(t.disclaimtitle);
-			$('#policyAbout').html(t.abouttitle);
+			$('#policyAbout').html(t.abouttitle);  */
 			$('#searchHint').html(t.searchhint);
 			$('#searchNothing').html(t.nothingfound);
 			$('#searchFor').prop('placeholder',t.searchfor);
-			$('#policyTopButton').html(t.policies);
-*/
+	//		$('#policyTopButton').html(t.policies);
 			$('#signinTitle').html(t.signin);
 			$('#signoutTitle').html(t.signout);
 //			$('#dateGrid').html(t.lastupdated + ': <span class="dateColor">' + todaysDate + '</span>');

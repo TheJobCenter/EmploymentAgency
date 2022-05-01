@@ -541,7 +541,16 @@ input[type=search] { background-color: #fffff0; color: #36454f; border: solid #8
 .signinSVG {fill: #36454f}
 .signOutSVG {fill: #36454f; display: none;}
 .logoGrid { background: url('/res/header-light.png')  no-repeat;}
-input[type=search] { background: url('/res/search-light.png') left 5px center no-repeat;}
+input[type=search] { background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMzY0NTRmIiBkPSJNNTAwLjMgNDQzLjdsLTExOS43LTExOS43YzI3LjIyLTQwLjQxIDQwLjY1LTkwLjkgMzMuNDYtMTQ0LjdDNDAxLjggODcuNzkgMzI2LjggMTMuMzIgMjM1LjIgMS43MjNDOTkuMDEtMTUuNTEtMTUuNTEgOTkuMDEgMS43MjQgMjM1LjJjMTEuNiA5MS42NCA4Ni4wOCAxNjYuNyAxNzcuNiAxNzguOWM1My44IDcuMTg5IDEwNC4zLTYuMjM2IDE0NC43LTMzLjQ2bDExOS43IDExOS43YzE1LjYyIDE1LjYyIDQwLjk1IDE1LjYyIDU2LjU3IDBDNTE1LjkgNDg0LjcgNTE1LjkgNDU5LjMgNTAwLjMgNDQzLjd6TTc5LjEgMjA4YzAtNzAuNTggNTcuNDItMTI4IDEyOC0xMjhzMTI4IDU3LjQyIDEyOCAxMjhjMCA3MC41OC01Ny40MiAxMjgtMTI4IDEyOFM3OS4xIDI3OC42IDc5LjEgMjA4eiIvPjwvc3ZnPg==') left 5px center no-repeat;}
+/* to change svg fill color goto https://base64encode.org and enter....
+
+<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 512 512"><path fill="#36454f" d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"/></svg>
+
+and change the FILL option, encode and paste the code above and do the same for 'dark' mode in a light color below !!!!!
+
+*/
+
+input[type=search] {fill: blue;}
 input[type=search]::placeholder {color: #36454f; opacity: 1;}
 input[type=search]:-ms-input-placeholder {color: #36454f; opacity: 1;}
 input[type=search]::-ms-input-placeholder {color: #36454f; opacity: 1;}
@@ -566,7 +575,8 @@ input[type=search] { background-color: #71797e; color: #7df9ff; border: solid #c
 .signinSVG {fill: #fffff0;}
 .signOutSVG {fill: #fffff0; display:none;}
 .logoGrid { background: url('/res/header-dark.png')  no-repeat;}
-input[type=search] { background: url('/res/search-dark.png') left 5px center no-repeat; }
+input[type=search] { background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmYwIiBkPSJNNTAwLjMgNDQzLjdsLTExOS43LTExOS43YzI3LjIyLTQwLjQxIDQwLjY1LTkwLjkgMzMuNDYtMTQ0LjdDNDAxLjggODcuNzkgMzI2LjggMTMuMzIgMjM1LjIgMS43MjNDOTkuMDEtMTUuNTEtMTUuNTEgOTkuMDEgMS43MjQgMjM1LjJjMTEuNiA5MS42NCA4Ni4wOCAxNjYuNyAxNzcuNiAxNzguOWM1My44IDcuMTg5IDEwNC4zLTYuMjM2IDE0NC43LTMzLjQ2bDExOS43IDExOS43YzE1LjYyIDE1LjYyIDQwLjk1IDE1LjYyIDU2LjU3IDBDNTE1LjkgNDg0LjcgNTE1LjkgNDU5LjMgNTAwLjMgNDQzLjd6TTc5LjEgMjA4YzAtNzAuNTggNTcuNDItMTI4IDEyOC0xMjhzMTI4IDU3LjQyIDEyOCAxMjhjMCA3MC41OC01Ny40MiAxMjgtMTI4IDEyOFM3OS4xIDI3OC42IDc5LjEgMjA4eiIvPjwvc3ZnPg==') left 5px center no-repeat; }
+input[type=search] {fill: #fffff0;}
 input[type=search]::placeholder {color: #fffff0; opacity: 1;}
 input[type=search]:-ms-input-placeholder {color: #fffff0; opacity: 1;}
 input[type=search]::-ms-input-placeholder {color: #fffff0; opacity: 1;}

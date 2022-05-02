@@ -1,17 +1,20 @@
+		
 		workerURL = 'worker.php';
 		t = [], sp = []; 
 		translate = false;
+		passedHL = false;
 		websiteAddress = window.location.protocol + '//' + window.location.host;
 		websiteTitle = document.title.substring(0, document.title.indexOf('-')).trim();
 		var userLanguage = window.navigator.language.substring(0,2);	// default web browser language
 		var systemLang = document.documentElement.lang.substring(0,2);	// this websites default language
-		var hl = new URLSearchParams(window.location.search.trim().toLowerCase());
-		if (hl.get('hl') !== null) {	// override browser language
-			userLanguage = hl.get('hl').substring(0,2); 
+		var wls = new URLSearchParams(window.location.search.trim().toLowerCase());
+		if (wls.get('hl') !== null) {	// override browser language
+			userLanguage = wls.get('hl').substring(0,2); 
+			passedHL = true;
 		}
 		var postData = 'xfrom='+ systemLang + '&xto=' + userLanguage;
 		var checkValidLang = /^[a-z]+$/;
-		if(userLanguage.match(checkValidLang) && userLanguage !== systemLang) {
+		if(userLanguage.match(checkValidLang)) { //  && userLanguage !== systemLang) {
 			$.ajax({type:'POST', url: workerURL, data: postData ,  async: false, 
 				success: function(thisText){
 					t = JSON.parse(thisText);
@@ -58,14 +61,11 @@
 	}
 		hideHints();
 		hideLogin();
-		
-		if (window.location.pathname.trim().toLowerCase().substring(0,1) === '/'){ 	// auto display policies aas though they're in a directory
-		//	alert("subdirectory");
-		}
 
+			
 
-		if (hl.has('q')) {
-			getParams = 'hl=' + userLanguage + '&q=' + hl.get('q');
+		if (wls.has('q')) {
+			getParams = 'hl=' + userLanguage + '&q=' + wls.get('q');
 			getParams = getParams.replace(/%|;/g,' ');		// don't allow % or ; characters in url parameter
 			$.ajax({type:'POST', url: workerURL, data: getParams ,  async: false, 
 				success: function(thisText){
@@ -78,16 +78,25 @@
 					// do nothing, don't care !!
 				}
 			});
+		} else {
+
+			if (wls.get(t.aupcode) != null) { showPolicy(t.aupcode);}
+			if (wls.get(t.toscode) != null) { showPolicy(t.toscode);}
+			if (wls.get(t.cookiecode) != null) { showPolicy(t.cookiecode);}
+			if (wls.get(t.privacycode) != null) { showPolicy(t.privacycode);}
+			if (wls.get(t.greencode) != null) { showPolicy(t.greencode);}
+			if (wls.get(t.disclaimcode) != null) { showPolicy(t.disclaimcode);}
+			if (wls.get(t.contactcode) != null) { showPolicy(t.contactcode);}
+			
 		}
 		if(window.history.replaceState) {
 			window.history.replaceState({}, null , websiteAddress);	// get rid of trailing search parameters to make it tidy !!
 		}
 
-	//	$('#radioNews').prop('checked', true);
 			
 		$('#searchform').submit(function(e) { // this does the Submit search
 			e.preventDefault();
-			if($('#hintFirst').html() != '') selectHint('hintFirst');
+			if($('#hintFirst').html() != '' && $('#searchFor').val().rtrim(1) != ' ') selectHint('hintFirst');
 
 			var sf = $('#searchFor').val().trim();
 			if(sf.indexOf(' ') != -1) sf=sf.split(' ').toString(); // convert from space seperated list to comma seperated list
@@ -150,6 +159,12 @@
 
 		});
 		
+		function showTab(name) {
+			
+			$('#'+name).prop('checked',true);
+			
+		}
+		
 		function selectHint(btnName) {
 					
 			var hint = $('#'+btnName).html();
@@ -188,30 +203,55 @@
 		}
 		
 		function showPolicy(showWhat) {
-		
-			$('.policyDropdownList').hide();
-			var pol = new Array(), postData = 'policy=' + showWhat + '&hl=' + userLanguage;
-			$.ajax({type:'POST', url: workerURL, data: postData , 
+
+			var pol = '', postData = 'policy=' + showWhat + '&hl=' + userLanguage;
+			$.ajax({type:'POST', url: workerURL, data: postData , async: false,
 				success: function(thisText){
 					pol = JSON.parse(thisText);
-			//		document.title = t.titlepolicypre + ' : ' + pol[0].displayname + ' ' + t.titlepolicypost;
-					alert(pol[0].content);
-					pol = Array(); 
+					document.title = t.titlepolicypre + ' : ' + pol.displayname + ' ' + t.titlepolicypost;
+					if (showWhat == t.contactcode) {
+						showTab('tabContact');
+						$('#contactTab').html(pol.content);
+
+					} else {
+						showTab('tabPolicies');
+						$('#policiesTab').html(pol.content);
+					}
+
 				},
 				error: function(someotherText) {
 					alert('Could not find that policy in language "' + userLanguage + '"');
 				}
 			});
-			$('.policyDropdownList').show();
 
 		}
 		
 		function showLogin() {
+						
+	//		$('#loginForm').show();
+		var cookieOptions = {
+			textPopup: 'Sign in or register.',
+			textAccept : 'Register',
+			textConfigure : 'Sign in',
+			textSave : 'Cancel',
+			switches: [
+				{	text: "I've read, and agree to, this sites policies",
+					name: 'agreeUser',
+					purpose: 'necessary'	
+				}
+			]
+		}
+		if(popupSignin(cookieOptions)) {
 			
 			$('#signinSVG').hide();
 			$('#signoutSVG').show();
-	//		$('#loginForm').show();
-			
+
+		}
+
+
+
+
+
 		}
 
 		function hideLogin() {
@@ -224,60 +264,71 @@
 if (!navigator.userAgent.match(/bot|facebookexternalhit|google|ia_archiver|slurp|spider|yandex/i)) {	
 	// if you're a search engine bot, don't bother with consent cookie screen
 
-		var cookieOptions = {
-			textPopup: 'We use cookies to ensure you have the best experience on our site. If you continue to use our site, we will assume that you agree to their use. For more information, please see our <a href="#">privacy policy</a>.',
-			textAccept : 'Accept all',
-			textConfigure : 'Configure choices',
-			textSave : 'Save choices',
+		var cookies = {
+			textPopup: 'We use cookies to ensure you have the best experience on our site. If you continue to use our site, we will assume that you agree to their use. For more information, please read our <strong>Cookie policy</strong>.',
+			btnAcceptAll : 'Accept all',
+			btnConfigure : 'Configure choices',
+			btnSave : 'Save choices',
 			switches: [
 				{	text: 'Storing user sign in details',
 					name: 'cookieUser',
-					purpose: 'necessary'	
+					default: 'checked'	
 				},
 				{
 					text: 'Storing user preferences on this device',
 					name: 'cookiePreferences',
-					purpose: 'functionality'	
+					default: 'checked'	
 				},
 				{
 					text: 'Allow access to location data',
 					name: 'cookieLocation',
-					purpose: 'statistics'	
+					default: ''	
 				},
 				{
 					text: 'Allow 3rd party adverts and analysis',
 					name: 'cookieAdverts',
-					purpose: 'markting'	
+					default: ''	
 				}
 			]
 		}
-		popupConsent(cookieOptions);
+		cookieConsent(cookies);
 }
 
 // cookie consent script added
 
-function popupConsent(cookieOptions) {
+    function getCookieValue(name) {
+      let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
+      return result ? result.pop() : ""
+    }
+	
+	function setCookieValue(name, value, expires) {
+		if (expires === '') {expires = '""';}
+		document.cookie = name+'=' + value + '; path=/; expires=' + expires;
+	}
 
-	let numberCookies = cookieOptions.switches.length;
 
-	let htmlCode = '<div class="popup" id="popupConsent"><section id="contentPopupConsent"><p>'+cookieOptions["textPopup"]+'</p></section>';
+function cookieConsent(cookies) {
+
+	let cookiesCount = cookies.switches.length;
+
+	let htmlCode = '<div class="popup" id="popupConsent"><section id="contentPopupConsent"><p>'+cookies["textPopup"]+'</p></section>';
 	htmlCode += '<section id="configureSection"><table>';
-	for(i =0; i < numberCookies; i++) {
-		htmlCode += '<tr><th><div class="switch checked" id="'+cookieOptions.switches[i].name+'"><div class="circle" id="'+cookieOptions.switches[i].name+'Circle"></div></div></th><th class="text-switch">'+cookieOptions.switches[i].text+'</th></tr>';
+	for(i =0; i < cookiesCount; i++) {
+		htmlCode += '<tr><th><div class="switch checked" id="'+cookies.switches[i].name+'"><div class="circle" id="'+cookies.switches[i].name+'Circle"></div></div></th><th class="text-switch">'+cookies.switches[i].text+'</th></tr>';
 	}
 	
 	htmlCode += '</table></section><div class="choice-container-buttons">';
-	htmlCode += '<button class="c-button" id="accept"><div class="c-ripple js-ripple"><span class="c-ripple-circle-accept"></span></div>'+cookieOptions["textAccept"]+'</button>';
-	htmlCode += '<button class="c-button" id="configure"><div class="c-ripple js-ripple"><span class="c-ripple-circle-configure"></span></div>'+cookieOptions["textConfigure"]+'</button>';
-	htmlCode += '<button class="c-button" id="checkedIn"><div class="c-ripple js-ripple"><span class="c-ripple-circle-checkedIn"></span></div>'+cookieOptions["textSave"]+'</button>';
+	htmlCode += '<button class="c-button" id="btnAcceptAll"><div class="c-ripple js-ripple"><span class="c-ripple-circle-accept"></span></div>'+cookies["btnAcceptAll"]+'</button>';
+	htmlCode += '<button class="c-button" id="btnConfigure"><div class="c-ripple js-ripple"><span class="c-ripple-circle-configure"></span></div>'+cookies["btnConfigure"]+'</button>';
+	htmlCode += '<button class="c-button" id="btnSave"><div class="c-ripple js-ripple"><span class="c-ripple-circle-checkedIn"></span></div>'+cookies["btnSave"]+'</button>';
 	htmlCode += '</div></div><div id="backgroundPopup"></div>'
 	
 	document.body.insertAdjacentHTML('beforeEnd', htmlCode);
 
-	for(i =0; i < numberCookies; i++) {
-		if (cookieOptions.switches[i].purpose != 'necessary' && cookieOptions.switches[i].purpose != 'functionality') {
-			$('#' + cookieOptions.switches[i].name + 'Circle').removeClass("move-circle-right").addClass("move-circle-left");
-			$('#' + cookieOptions.switches[i].name).removeClass("checked");
+	for(i =0; i < cookiesCount; i++) {
+		if (cookies.switches[i].default != 'checked' ) {
+			$('#' + cookies.switches[i].name + 'Circle').removeClass("move-circle-right").addClass("move-circle-left");
+			$('#' + cookies.switches[i].name).removeClass("checked");
 		}
 	}
 
@@ -325,50 +376,52 @@ function popupConsent(cookieOptions) {
     date = date.toUTCString();
 
     let popupConsent = $('#popupConsent');
-    let acceptButton = $( "#accept" );
-    let configureButton = $( "#configure" );
-    let saveButton = $( "#checkedIn" );
+    let btnAcceptAll = $( "#btnAcceptAll" );
+    let btnConfigure = $( "#btnConfigure" );
+    let btnSave = $( "#btnSave" );
     let configureSection = $('#configureSection');
     let contentPopupConsent = $('#contentPopupConsent');
 	
-
-    function getCookieValue(name) {
-      let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
-      return result ? result.pop() : ""
-    }
-
     if(!getCookieValue("cookieConsent")){
-		$(saveButton).hide();
+		$(btnSave).hide();
 		$(popupConsent).show(200);
 		document.getElementById("backgroundPopup").classList.add('background-popup');
     }
 
-    // On configure le bouton "Accepter"
-    $(acceptButton).click(function() {
-		$(popupConsent).fadeOut(1000);
-		for(i =0; i < numberCookies; i++) {
-			document.cookie = cookieOptions.switches[i].name+'=true; path=/; expires=' + date;
+    $(btnAcceptAll).click(function() {
+		for(i =0; i < cookiesCount; i++) {
+			$('#'+cookies.switches[i].name).addClass('checked');
 		}
-		document.getElementById("backgroundPopup").classList.remove('background-popup');
-		document.cookie = 'cookieConsent=true; path=/; expires=' + date;
+		saveCookies();
     });
 
-    $(configureButton).click(function() {
-      $(configureButton).fadeOut(0);
-      $(saveButton).fadeIn(0);
+    $(btnConfigure).click(function() {
+      $(btnConfigure).fadeOut(0);
+      $(btnSave).fadeIn(0);
       $(contentPopupConsent).fadeOut(0);
-      $(configureSection).fadeIn(1000);
+      $(configureSection).fadeIn(0);
     });
 
-    $(saveButton).click(function() {
-		$(popupConsent).fadeOut(1000);
-		for(i =0; i < numberCookies; i++) {
-			if($('#'+cookieOptions.switches[i].name).hasClass('checked')){
-				document.cookie = cookieOptions.switches[i].name+'=true; path=/; expires=' + date;
-			} 
+    $(btnSave).click(function() {
+		saveCookies();
+	});
+	
+	function saveCookies() {
+		$(popupConsent).fadeOut(200);
+		for(i =0; i < cookiesCount; i++) {
+			if($('#'+cookies.switches[i].name).hasClass('checked')){
+				setCookieValue(cookies.switches[i].name, true, date);
+			}
 		}
 		document.getElementById("backgroundPopup").classList.remove('background-popup');
-		document.cookie = 'cookieConsent=true; path=/; expires=' + date;
-    });
+		setCookieValue('cookieConsent', true, date);
+	}
+	
+	
+	
   });
+}
+
+function popupSignin(cookieOptions) {
+
 }

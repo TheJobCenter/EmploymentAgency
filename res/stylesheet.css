@@ -84,7 +84,7 @@ body {
   border-radius: 50px;
   background-color: white;
   padding: 5px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.16), 3px 3px 3px rgba(0, 0, 0, 0.23);
   cursor: pointer;
 }
 .switch .circle {
@@ -154,7 +154,6 @@ body {
   transform: translate(-50%, -50%);
   width: 700px;
   max-width: 95%;
-  background: white;
   padding: 10px;
   border-radius: 12px;
   font-size: 1.25em;
@@ -170,6 +169,7 @@ body {
 .popup #contentPopupConsent:hover, .popup #configureSection:hover {
   box-shadow: 0 0 0 transparent;
 }
+
 .popup .content-popup-theme {
   text-align: left;
 }
@@ -194,7 +194,6 @@ body {
   overflow: visible;
   font-size: 14px;
   text-align: center;
-  font-family: "Roboto", sans-serif;
   letter-spacing: 0.5px;
   border: 0;
   border-radius: 7px;
@@ -229,9 +228,8 @@ body {
   margin: 0;
   vertical-align: middle;
   overflow: visible;
-  font-size: 14px;
+  font-size: 25px;
   text-align: center;
-  font-family: "Roboto", sans-serif;
   letter-spacing: 0.5px;
   background: transparent;
   border: 0;
@@ -247,30 +245,29 @@ body {
 .popup .choice-container-buttons .c-button:not(:disabled) {
   cursor: pointer;
 }
-.popup .choice-container-buttons #accept {
+.popup .choice-container-buttons #btnAcceptAll {
   color: #24cc31;
 }
-.popup .choice-container-buttons #accept:hover {
-  background: #2fd04a17;
-}
-.popup .choice-container-buttons #configure {
-  color: #4285f4;
-}
-.popup .choice-container-buttons #configure:hover {
+.popup .choice-container-buttons #btnAcceptAll:hover {
   background: #F0F8FF;
 }
-.popup .choice-container-buttons #checkin {
+.popup .choice-container-buttons #btnConfigure {
+  color: #4285f4;
+}
+.popup .choice-container-buttons #btnConfigure:hover {
+  background: #F0F8FF;
+}
+.popup .choice-container-buttons #btnSave {
   display: none;
   color: #4285f4;
 }
-.popup .choice-container-buttons #checkin:hover {
+.popup .choice-container-buttons #btnSave:hover {
   background: #F0F8FF;
 }
 .popup #configureSection {
   display: none;
 }
 .popup #configureSection table th {
-  color: black;
   text-align: left;
 }
 .popup #configureSection table .text-switch {
@@ -282,9 +279,6 @@ body {
     display: block;
     padding: 4px;
 }
-
-
-
 
 @media only screen and (orientation: landscape) {
 
@@ -328,6 +322,7 @@ body {
 
 .tabs input[type="radio"]:checked + label + .tab {
 	display: block;
+	
 }
 
 
@@ -556,6 +551,7 @@ input[type=search]:-ms-input-placeholder {color: #36454f; opacity: 1;}
 input[type=search]::-ms-input-placeholder {color: #36454f; opacity: 1;}
 .policyDropdownList button { color: #36454f; }
 .tabs input[type="radio"]:checked + label {background: #e5e4e2; color:blue;}
+.popup { background: ivory;}
 
 }
 
@@ -581,7 +577,8 @@ input[type=search]::placeholder {color: #fffff0; opacity: 1;}
 input[type=search]:-ms-input-placeholder {color: #fffff0; opacity: 1;}
 input[type=search]::-ms-input-placeholder {color: #fffff0; opacity: 1;}
 .policyDropdownList button { color: #fffff0; }
-.tabs input[type="radio"]:checked + label {background: #818589;}
+.tabs input[type="radio"]:checked + label {background: #818589; color:cyan;}
+.popup { background: silver;}
 
 
 

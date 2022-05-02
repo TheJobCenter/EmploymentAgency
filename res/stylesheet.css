@@ -535,7 +535,7 @@ input[type=search] { background-color: #fffff0; color: #36454f; border: solid #8
 .policyDropButton {color: #36454f;}
 .signinSVG {fill: #36454f}
 .signOutSVG {fill: #36454f; display: none;}
-.logoGrid { background: url('/res/header-light.png')  no-repeat;}
+.logoGrid { background: url('https://thejobcenter.github.io/EmploymentAgency/res/header-light.png')  no-repeat;}
 input[type=search] { background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMzY0NTRmIiBkPSJNNTAwLjMgNDQzLjdsLTExOS43LTExOS43YzI3LjIyLTQwLjQxIDQwLjY1LTkwLjkgMzMuNDYtMTQ0LjdDNDAxLjggODcuNzkgMzI2LjggMTMuMzIgMjM1LjIgMS43MjNDOTkuMDEtMTUuNTEtMTUuNTEgOTkuMDEgMS43MjQgMjM1LjJjMTEuNiA5MS42NCA4Ni4wOCAxNjYuNyAxNzcuNiAxNzguOWM1My44IDcuMTg5IDEwNC4zLTYuMjM2IDE0NC43LTMzLjQ2bDExOS43IDExOS43YzE1LjYyIDE1LjYyIDQwLjk1IDE1LjYyIDU2LjU3IDBDNTE1LjkgNDg0LjcgNTE1LjkgNDU5LjMgNTAwLjMgNDQzLjd6TTc5LjEgMjA4YzAtNzAuNTggNTcuNDItMTI4IDEyOC0xMjhzMTI4IDU3LjQyIDEyOCAxMjhjMCA3MC41OC01Ny40MiAxMjgtMTI4IDEyOFM3OS4xIDI3OC42IDc5LjEgMjA4eiIvPjwvc3ZnPg==') left 5px center no-repeat;}
 /* to change svg fill color goto https://base64encode.org and enter....
 
@@ -570,7 +570,7 @@ input[type=search] { background-color: #71797e; color: #7df9ff; border: solid #c
 .policyDropButton {color: #0000ff;}
 .signinSVG {fill: #fffff0;}
 .signOutSVG {fill: #fffff0; display:none;}
-.logoGrid { background: url('/res/header-dark.png')  no-repeat;}
+.logoGrid { background: url('https://thejobcenter.github.io/EmploymentAgency/res/header-dark.png')  no-repeat;}
 input[type=search] { background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmYwIiBkPSJNNTAwLjMgNDQzLjdsLTExOS43LTExOS43YzI3LjIyLTQwLjQxIDQwLjY1LTkwLjkgMzMuNDYtMTQ0LjdDNDAxLjggODcuNzkgMzI2LjggMTMuMzIgMjM1LjIgMS43MjNDOTkuMDEtMTUuNTEtMTUuNTEgOTkuMDEgMS43MjQgMjM1LjJjMTEuNiA5MS42NCA4Ni4wOCAxNjYuNyAxNzcuNiAxNzguOWM1My44IDcuMTg5IDEwNC4zLTYuMjM2IDE0NC43LTMzLjQ2bDExOS43IDExOS43YzE1LjYyIDE1LjYyIDQwLjk1IDE1LjYyIDU2LjU3IDBDNTE1LjkgNDg0LjcgNTE1LjkgNDU5LjMgNTAwLjMgNDQzLjd6TTc5LjEgMjA4YzAtNzAuNTggNTcuNDItMTI4IDEyOC0xMjhzMTI4IDU3LjQyIDEyOCAxMjhjMCA3MC41OC01Ny40MiAxMjgtMTI4IDEyOFM3OS4xIDI3OC42IDc5LjEgMjA4eiIvPjwvc3ZnPg==') left 5px center no-repeat; }
 input[type=search] {fill: #fffff0;}
 input[type=search]::placeholder {color: #fffff0; opacity: 1;}

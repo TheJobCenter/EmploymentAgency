@@ -61,7 +61,7 @@
 	}
 		hideHints();
 		hideLogin();
-		showPolicy('contact');
+		showPolicy('contact', false);
 			
 
 		if (wls.has('q')) {
@@ -80,13 +80,16 @@
 			});
 		} else {
 
-			if (wls.get(t.aupcode) != null) { showPolicy(t.aupcode);}
-			if (wls.get(t.toscode) != null) { showPolicy(t.toscode);}
-			if (wls.get(t.cookiecode) != null) { showPolicy(t.cookiecode);}
-			if (wls.get(t.privacycode) != null) { showPolicy(t.privacycode);}
-			if (wls.get(t.greencode) != null) { showPolicy(t.greencode);}
-			if (wls.get(t.disclaimcode) != null) { showPolicy(t.disclaimcode);}
-			if (wls.get(t.contactcode) != null) { showPolicy(t.contactcode);}
+			if (wls.get(t.aupcode) != null) { showPolicy(t.aupcode,true);}
+			if (wls.get(t.toscode) != null) { showPolicy(t.toscode,true);}
+			if (wls.get(t.cookiecode) != null) { showPolicy(t.cookiecode,true);}
+			if (wls.get(t.privacycode) != null) { showPolicy(t.privacycode,true);}
+			if (wls.get(t.greencode) != null) { showPolicy(t.greencode,true);}
+			if (wls.get(t.disclaimcode) != null) { showPolicy(t.disclaimcode,true);}
+			if (wls.get(t.contactcode) != null) { showPolicy(t.contactcode,true);}
+			
+		//	document.querySelector($("meta[property='og:type']").attr('content'));
+		//	$("meta[property='og:type']").attr('content', "article");
 			
 		}
 		if(window.history.replaceState) {
@@ -202,7 +205,7 @@
 
 		}
 		
-		function showPolicy(showWhat) {
+		function showPolicy(showWhat, showIt) {
 
 			var pol = '', postData = 'policy=' + showWhat + '&hl=' + userLanguage;
 			$.ajax({type:'POST', url: workerURL, data: postData , async: false,
@@ -211,11 +214,11 @@
 					document.title = t.titlepolicypre + ' : ' + pol.displayname + ' ' + t.titlepolicypost;
 					displayContent = '<hr><h1>' + pol.displayname + '</h1>' + pol.content;
 					if (showWhat == t.contactcode) {
-						showTab('tabContact');
+						if (showIt) {showTab('tabContact');}
 						$('#contactTab').html(displayContent);
 
 					} else {
-						showTab('tabPolicies');
+						if (showIt) {showTab('tabPolicies');}
 						$('#policiesTab').html(displayContent);
 					}
 

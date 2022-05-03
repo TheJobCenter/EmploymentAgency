@@ -61,7 +61,7 @@
 	}
 		hideHints();
 		hideLogin();
-
+		showPolicy('contact');
 			
 
 		if (wls.has('q')) {
@@ -209,13 +209,14 @@
 				success: function(thisText){
 					pol = JSON.parse(thisText);
 					document.title = t.titlepolicypre + ' : ' + pol.displayname + ' ' + t.titlepolicypost;
+					displayContent = '<hr><h1>' + pol.displayname + '</h1>' + pol.content;
 					if (showWhat == t.contactcode) {
 						showTab('tabContact');
-						$('#contactTab').html(pol.content);
+						$('#contactTab').html(displayContent);
 
 					} else {
 						showTab('tabPolicies');
-						$('#policiesTab').html(pol.content);
+						$('#policiesTab').html(displayContent);
 					}
 
 				},

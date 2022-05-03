@@ -98,20 +98,20 @@ body {
 
 .move-circle-right {
   animation: 0.5s moveCircleRight cubic-bezier(0.87, -0.41, 0.19, 1.44) forwards;
-  transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
   -o-transition: all 0.2s ease-in;
   -webkit-transition: all 0.2s ease-in;
   -ms-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
 }
 
 .move-circle-left {
   animation: 0.5s moveCircleLeft cubic-bezier(0.87, 0.41, 0.19, 1.44) forwards;
-  transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
   -o-transition: all 0.2s ease-in;
   -webkit-transition: all 0.2s ease-in;
   -ms-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
 }
 
 @keyframes moveCircleRight {
@@ -198,6 +198,7 @@ body {
   border: 0;
   border-radius: 7px;
   user-select: none;
+  -webkit-user-select: none;
   transition: all 0.2s ease;
   outline: 0;
   cursor: pointer;
@@ -234,6 +235,7 @@ body {
   background: transparent;
   border: 0;
   border-radius: 1px;
+  -webkit-user-select:none;
   user-select: none;
   transition: all 0.2s ease;
   background: transparent;

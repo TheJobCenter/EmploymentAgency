@@ -1,4 +1,3 @@
-		
 		workerURL = 'worker.php';
 		t = [], sp = []; 
 		translate = false;
@@ -264,8 +263,7 @@
 			$('#signoutSVG').hide();
 			$('#signinSVG').show();
 		}
-		
-if (!navigator.userAgent.match(/bot|facebookexternalhit|google|ia_archiver|slurp|spider|yandex/i)) {	
+if (!navigator.userAgent.match(/bot|crawl|facebookexternalhit|google|ia_archiver|search|slurp|spider|yandex/i)) {	
 	// if you're a search engine bot, don't bother with consent cookie screen
 
 		var cookies = {

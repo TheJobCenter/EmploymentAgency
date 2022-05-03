@@ -197,8 +197,8 @@ body {
   letter-spacing: 0.5px;
   border: 0;
   border-radius: 7px;
-  user-select: none;
   -webkit-user-select: none;
+  user-select: none;
   transition: all 0.2s ease;
   outline: 0;
   cursor: pointer;
